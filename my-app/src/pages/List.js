@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'semantic-ui-react';
 import { withRouter } from "react-router-dom";
 
 const List = props => {
+  const [searchResults, setSearchResults] = useState({});
   const searchValue = props.match.params.name;
 
-  console.log(searchValue);
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetch(`https://rickandmortyapi.com/api/character/?name=${searchValue}`)
+        .then(res => res.json())
+        .then(json => setSearchResults(json))
+    }
+
+    fetchData();
+  }, [searchValue]);
 
   return (
     <div>
@@ -19,12 +28,18 @@ const List = props => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <Table.Cell>Name</Table.Cell>
-            <Table.Cell>Species</Table.Cell>
-            <Table.Cell>Gender</Table.Cell>
-            <Table.Cell>Origin</Table.Cell>
-          </Table.Row>
+          {
+            searchResults.results && searchResults.results.map((
+              { gender, id, name, origin, species }) => (
+                <Table.Row key={id}>
+                  <Table.Cell>{name}</Table.Cell>
+                  <Table.Cell>{species}</Table.Cell>
+                  <Table.Cell>{gender}</Table.Cell>
+                  <Table.Cell>{origin.name}</Table.Cell>
+                </Table.Row>
+              )
+            )
+          }
         </Table.Body>
       </Table>
     </div>
