@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import List from './pages/List';
+import Details from './pages/Details';
 
 import './App.css';
 
@@ -19,6 +20,9 @@ const App = () => {
       <Router>
         <Navbar />
         <Switch>
+          <Route path="/details/:id">
+            <Details />
+          </Route>
           <Route path="/list/:name">
             <List />
           </Route>

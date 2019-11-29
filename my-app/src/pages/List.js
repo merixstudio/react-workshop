@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'semantic-ui-react';
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from 'react-router-dom';
 
 const List = props => {
   const [searchResults, setSearchResults] = useState({});
@@ -32,7 +32,11 @@ const List = props => {
             searchResults.results && searchResults.results.map((
               { gender, id, name, origin, species }) => (
                 <Table.Row key={id}>
-                  <Table.Cell>{name}</Table.Cell>
+                  <Table.Cell>
+                    <Link to={`/details/${id}`}>
+                      {name}
+                    </Link>
+                  </Table.Cell>
                   <Table.Cell>{species}</Table.Cell>
                   <Table.Cell>{gender}</Table.Cell>
                   <Table.Cell>{origin.name}</Table.Cell>
