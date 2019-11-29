@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { List } from 'semantic-ui-react'
 
 const Navbar = () => (
-  <ul className="navbar">
-    <li>
+  <List bulleted horizontal>
+    <List.Item>
       <Link to="/">Homepage</Link>
-    </li>
-    <li>
+    </List.Item>
+    <List.Item>
       <Link to="/about">About</Link>
-    </li>
-  </ul>
+    </List.Item>
+  </List>
 )
 
 export default Navbar;
